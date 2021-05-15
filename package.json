@@ -1,0 +1,26 @@
+{
+  "name": "fiscal-code-generator-bot",
+  "version": "1.0.0",
+  "description": "Create a Telegram Bot that generates a Fiscal Code (https://it.wikipedia.org/wiki/Codice_fiscale)",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LucaBert89/fiscal-code-generator-bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LucaBert89/fiscal-code-generator-bot/issues"
+  },
+  "homepage": "https://github.com/LucaBert89/fiscal-code-generator-bot#readme",
+  "devDependencies": {
+    "jest": "^26.6.3"
+  },
+  "dependencies": {
+    "dotenv": "^9.0.2",
+    "telegraf": "^4.3.0"
+  }
+}
