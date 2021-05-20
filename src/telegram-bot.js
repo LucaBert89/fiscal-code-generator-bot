@@ -1,5 +1,5 @@
 var parse = require('csv-parse');
-
+const surnameGenerator = require("./surname");
 //const { Telegraf, Scenes, session } = require('telegraf')
 const {Telegraf, Scenes, session, Markup} = require('telegraf');
 require('dotenv').config()
@@ -15,26 +15,25 @@ const contactDataWizard = new Scenes.WizardScene(
         return ctx.wizard.next();
     },
     (ctx) => {
-        // validation example
         ctx.wizard.state.contactData.firstName = ctx.message.text;
-        console.log(ctx.message.text);
+        console.log(ctx.wizard.state.contactData.firstName);
         ctx.reply("What's your last name?");
         return ctx.wizard.next();
     },
     (ctx) => {
-        // validation example
+        console.log(ctx.wizard.state.contactData.lastname);
+        //surnameGenerator(ctx.message.text);
         ctx.wizard.state.contactData.lastname = ctx.message.text;
         ctx.reply("What's your sex?");
         return ctx.wizard.next();
     },
     (ctx) => {
-        // validation example
         ctx.wizard.state.contactData.birthday = ctx.message.text;
         ctx.reply("When is your birthday? use this form xx/xx/xx");
         return ctx.wizard.next();
     },
     (ctx) => {
-        // validation example
+
         console.log(ctx.update.message.text);
         ctx.wizard.state.contactData.birthCity = ctx.message.text;
         ctx.reply("What' your birth city?");
