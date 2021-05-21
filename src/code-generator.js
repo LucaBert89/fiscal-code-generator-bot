@@ -9,12 +9,7 @@ class fiscalCode {
     get surnameCode() {
         const consonant = this.surname.match(/[bcdfghjklmnpqrstvwxys]/gi);
         const vowel = this.surname.match(/[aeiou]/gi);
-        if(consonant && consonant.length > 0 ) {
-            return surnameGenerator(consonant, vowel);
-        } else {
-            return vowel.slice(0,3).join("");
-        }
-       
+        return consonant && consonant.length > 0 ? surnameGenerator(consonant,vowel) : vowel.slice(0,3).join("");
     }
 }
 
