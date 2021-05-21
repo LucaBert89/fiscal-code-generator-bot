@@ -7,19 +7,20 @@ class fiscalCode {
         this.birthCity = birthCity;
     }
     get surnameCode() {
-        const consonant = this.surname.match(/[bcdfghjklmnpqrstvwxys]/gi);
-        const vowel = this.surname.match(/[aeiou]/gi);
-        return consonant && consonant.length > 0 ? surnameGenerator(consonant,vowel) : vowel.slice(0,3).join("");
+        const consonant = this.surname.replace(/\s+/g, '').match(/[bcdfghjklmnpqrstvwxys]/gi);
+        const vowel = this.surname.replace(/\s+/g, '').match(/[aeiou]/gi);
+        return consonant && consonant.length > 0 ? surnameGenerator(consonant,vowel) : vowel.slice(0,3).join("").toUpperCase();
+
     }
 }
 
 function surnameGenerator(consonant, vowel) {
         const fiscalConsonant = consonant.slice(0,3).join("");
         if(fiscalConsonant.length === 3) {
-            return fiscalConsonant;
+            return fiscalConsonant.toUpperCase();
         } else {
             const addVowel = fiscalConsonant + vowel.slice(0,3-fiscalConsonant.length).join("");
-            return addVowel;
+            return addVowel.toUpperCase();
         }
 } 
 
