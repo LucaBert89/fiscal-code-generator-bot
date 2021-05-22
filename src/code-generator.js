@@ -9,8 +9,13 @@ class fiscalCode {
     get surnameCode() {
         const consonant = this.surname.replace(/\s+/g, '').match(/[bcdfghjklmnpqrstvwxys]/gi);
         const vowel = this.surname.replace(/\s+/g, '').match(/[aeiou]/gi);
-        return consonant && consonant.length > 0 ? surnameGenerator(consonant,vowel) : vowel.slice(0,3).join("").toUpperCase();
-
+        return consonant && consonant.length > 0 ? surnameGenerator(consonant,vowel) : vowel.slice(0,3).join("").toUpperCase(); 
+    }
+    get nameCode() {
+        const consonant = this.name.replace(/\s+/g, '').match(/[bcdfghjklmnpqrstvwxys]/gi);
+        if(consonant.length >= 4) {
+            return consonant.slice(0,4).map((e,i) => {if(i != 1) return e}).join("");
+        }
     }
 }
 

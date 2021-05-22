@@ -1,6 +1,6 @@
 const fiscalGenerator = require("../src/code-generator");
 
-describe('should generate the fiscal code', () => {
+describe('should generate the surname combination for the fiscal code', () => {
 
    const codeGenerator = new fiscalGenerator("", "Bertoldi","","","");
     test("should return 3 consonants of the surname", () => {
@@ -22,3 +22,13 @@ describe('should generate the fiscal code', () => {
         expect(codeGenerator4.surnameCode).toBe("BRR");
     });
 })
+
+describe('should generate the surname combination for the fiscal code', () => {
+
+    const codeGenerator = new fiscalGenerator("Lucatr", "Bertoldi","","","");
+     test("should return 3 consonants of the surname", () => {
+         expect(codeGenerator.nameCode).toBe("Ltr");
+     });
+ 
+   
+ })
