@@ -23,12 +23,16 @@ describe('should generate the surname combination for the fiscal code', () => {
     });
 })
 
-describe('should generate the surname combination for the fiscal code', () => {
+describe('should generate the name combination for the fiscal code', () => {
 
-    const codeGenerator = new fiscalGenerator("Lucatr", "Bertoldi","","","");
-     test("should return 3 consonants of the surname", () => {
-         expect(codeGenerator.nameCode).toBe("Ltr");
+    const codeGenerator = new fiscalGenerator("Ricardo", "Bertoldi","","","");
+     test("should return the first,third and fourth consonants of the name", () => {
+         expect(codeGenerator.nameCode).toBe("Rrd");
      });
- 
+     
+     const codeGenerator1 = new fiscalGenerator("Manuel", "Bertoldi","","","");
+     test("should return the first three consonant of the name", () => {
+         expect(codeGenerator1.nameCode).toBe("Mnl");
+     });
    
  })

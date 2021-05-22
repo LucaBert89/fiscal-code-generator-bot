@@ -15,6 +15,8 @@ class fiscalCode {
         const consonant = this.name.replace(/\s+/g, '').match(/[bcdfghjklmnpqrstvwxys]/gi);
         if(consonant.length >= 4) {
             return consonant.slice(0,4).map((e,i) => {if(i != 1) return e}).join("");
+        } else {
+            return consonant.slice(0,3).join("");
         }
     }
 }
