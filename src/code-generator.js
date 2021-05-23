@@ -1,9 +1,9 @@
 class fiscalCode {
-    constructor(name, surname, sex, birthday, birthCity) {
+    constructor(name, surname, birthday, sex, birthCity) {
         this.name = name;
         this.surname = surname;
-        this.sex = sex;
         this.birthday = birthday;
+        this.sex = sex;
         this.birthCity = birthCity;
     }
     get surnameCode() {
@@ -13,11 +13,31 @@ class fiscalCode {
     }
     get nameCode() {
         const consonant = this.name.replace(/\s+/g, '').match(/[bcdfghjklmnpqrstvwxys]/gi);
+        const vowel = this.name.replace(/\s+/g, '').match(/[aeiou]/gi);
         if(consonant.length >= 4) {
-            return consonant.slice(0,4).map((e,i) => {if(i != 1) return e}).join("");
+            return consonant.slice(0,4).map((e,i) => {if(i != 1) return e}).join("").toUpperCase();
         } else {
-            return consonant.slice(0,3).join("");
+            return consonant && consonant.length > 0 ? surnameGenerator(consonant,vowel) : vowel.slice(0,3).join("").toUpperCase(); 
         }
+    }
+    get birthdayCode() {
+        const dayTable = {
+            "01":"A",
+            "02": "B",
+            "03": "C",
+            "04": "D",
+            "05": "E",
+            "06": "H",
+            "07": "L",
+            "08": "M",
+            "09": "P",
+            "10": "R",
+            "11": "S",
+            "12": "T"
+
+        }
+        console.log(dayTable[this.birthday.slice(3,5)]);
+        return this.birthday.slice(-2) + dayTable[this.birthday.slice(3, 5)];
     }
 }
 
