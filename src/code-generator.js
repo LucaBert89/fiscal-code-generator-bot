@@ -1,9 +1,9 @@
 class fiscalCode {
-    constructor(name, surname, birthday, sex, birthCity) {
+    constructor(name, surname, birthday, gender, birthCity) {
         this.name = name;
         this.surname = surname;
         this.birthday = birthday;
-        this.sex = sex;
+        this.gender = gender;
         this.birthCity = birthCity;
     }
     get surnameCode() {
@@ -21,7 +21,7 @@ class fiscalCode {
         }
     }
     get birthdayCode() {
-        const dayTable = {
+        const monthTable = {
             "01":"A",
             "02": "B",
             "03": "C",
@@ -36,8 +36,15 @@ class fiscalCode {
             "12": "T"
 
         }
-        console.log(dayTable[this.birthday.slice(3,5)]);
-        return this.birthday.slice(-2) + dayTable[this.birthday.slice(3, 5)];
+        return this.birthday.slice(-2) + monthTable[this.birthday.slice(3, 5)];
+    }
+    get genderCode() {
+        console.log(this.gender + 40);
+        if(this.gender === "F") {
+            return (parseInt(this.birthday.slice(0,2)) + 40).toString();
+        } else {
+            return this.birthday.slice(0,2);
+        }
     }
 }
 
