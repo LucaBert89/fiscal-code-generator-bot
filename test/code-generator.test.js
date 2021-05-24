@@ -64,3 +64,12 @@ describe('should generate the name combination for the fiscal code', () => {
      });
    
  })
+
+ describe('should generate the code of the gender for the fiscal code', () => {
+
+    const codeGenerator = new fiscalGenerator("Ricardo", "Bertoldi","08/12/1987","M","Trento");
+     test("take the last two digits of the YEAR and the code for the month", () => {
+         expect(codeGenerator.birthCityCode).toBe("L378");
+     });
+   
+ })

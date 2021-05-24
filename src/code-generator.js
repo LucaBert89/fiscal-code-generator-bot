@@ -1,3 +1,6 @@
+
+const fetch = require("node-fetch");
+
 class fiscalCode {
     constructor(name, surname, birthday, gender, birthCity) {
         this.name = name;
@@ -39,12 +42,14 @@ class fiscalCode {
         return this.birthday.slice(-2) + monthTable[this.birthday.slice(3, 5)];
     }
     get genderCode() {
-        console.log(this.gender + 40);
         if(this.gender === "F") {
             return (parseInt(this.birthday.slice(0,2)) + 40).toString();
         } else {
             return this.birthday.slice(0,2);
         }
+    }
+    get birthCityCode() {
+        getDataCsv(this.birthCity);
     }
 }
 
@@ -57,5 +62,19 @@ function surnameGenerator(consonant, vowel) {
             return addVowel.toUpperCase();
         }
 } 
+
+async function getDataCsv(birthCity) {
+    const response = await fetch("https://www.istat.it/storage/codici-unita-amministrative/Elenco-comuni-italiani.csv");
+    const data = await response.text();
+    const tableRows = data.split(/\n/);
+    tableRows.forEach(e =>{
+        const row = e.split(";");
+        if(row[6] === `${birthCity}`) {
+            return row[19];
+        }
+    })
+}
+
+  getDataCsv();
 
 module.exports = fiscalCode;
