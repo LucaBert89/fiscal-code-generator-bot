@@ -1,4 +1,3 @@
-
 const fetch = require("node-fetch");
 
 class fiscalCode {
@@ -48,8 +47,17 @@ class fiscalCode {
             return this.birthday.slice(0,2);
         }
     }
-    get birthCityCode() {
-        getDataCsv(this.birthCity);
+    async birthCityCode() {
+        const response = await fetch("https://www.istat.it/storage/codici-unita-amministrative/Elenco-comuni-italiani.csv");
+        const data = await response.text();
+        const tableRows = data.split(/\n/);
+        
+        for(const table of tableRows) {
+            const row = table.split(";");
+            if(row[6] === `${this.birthCity}`) {
+                return row[19];
+            }
+        }
     }
 }
 
@@ -63,18 +71,4 @@ function surnameGenerator(consonant, vowel) {
         }
 } 
 
-async function getDataCsv(birthCity) {
-    const response = await fetch("https://www.istat.it/storage/codici-unita-amministrative/Elenco-comuni-italiani.csv");
-    const data = await response.text();
-    const tableRows = data.split(/\n/);
-    tableRows.forEach(e =>{
-        const row = e.split(";");
-        if(row[6] === `${birthCity}`) {
-            return row[19];
-        }
-    })
-}
-
-  getDataCsv();
-
-module.exports = fiscalCode;
+module.exports = fiscalCode
