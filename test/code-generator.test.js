@@ -1,4 +1,5 @@
 const fiscalGenerator = require("../src/code-generator");
+const fetch = require("node-fetch");
 
 describe('should generate the surname combination for the fiscal code', () => {
 
@@ -64,12 +65,13 @@ describe('should generate the name combination for the fiscal code', () => {
      });
    
  })
-
- describe('should generate the code of the gender for the fiscal code', () => {
+ 
+ describe('should generate the code of the city', () => {
 
     const codeGenerator = new fiscalGenerator("Ricardo", "Bertoldi","08/12/1987","M","Trento");
-     test("take the last two digits of the YEAR and the code for the month", () => {
-         expect(codeGenerator.birthCityCode).toBe("L378");
+     test("take the code of the city added inside object", async  () => {
+         const data = await codeGenerator.birthCityCode();
+         expect(data).toEqual("L378");
      });
    
  })
