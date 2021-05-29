@@ -12,7 +12,7 @@ class fiscalCode {
     get surnameCode() {
         const consonant = this.surname.replace(/\s+/g, '').match(/[bcdfghjklmnpqrstvwxys]/gi);
         const vowel = this.surname.replace(/\s+/g, '').match(/[aeiou]/gi);
-        return consonant && consonant.length > 0 ? surnameGenerator(consonant,vowel) : vowel.slice(0,3).join("").toUpperCase(); 
+        return consonant && consonant.length > 0 ? this.surnameGenerator(consonant,vowel) : vowel.slice(0,3).join("").toUpperCase(); 
     }
     get nameCode() {
         const consonant = this.name.replace(/\s+/g, '').match(/[bcdfghjklmnpqrstvwxys]/gi);
@@ -20,7 +20,16 @@ class fiscalCode {
         if(consonant.length >= 4) {
             return consonant.slice(0,4).map((e,i) => {if(i != 1) return e}).join("").toUpperCase();
         } else {
-            return consonant && consonant.length > 0 ? surnameGenerator(consonant,vowel) : vowel.slice(0,3).join("").toUpperCase(); 
+            return consonant && consonant.length > 0 ? this.surnameGenerator(consonant,vowel) : vowel.slice(0,3).join("").toUpperCase(); 
+        }
+    }
+    surnameGenerator(consonant, vowel) {
+        const fiscalConsonant = consonant.slice(0,3).join("");
+        if(fiscalConsonant.length === 3) {
+            return fiscalConsonant.toUpperCase();
+        } else {
+            const addVowel = fiscalConsonant + vowel.slice(0,3-fiscalConsonant.length).join("");
+            return addVowel.toUpperCase();
         }
     }
     get birthdayCode() {
@@ -55,36 +64,18 @@ class fiscalCode {
         
         for(const table of tableRows) {
             const row = table.split(";");
-            if(row[6] === `${this.birthCity}`) {
-                return row[19];
-            }
+            if(row[6] === `${this.birthCity}`) {return row[19];}
         }
     }
     async controlCharacter() {
         const string = this.surnameCode + this.nameCode + this.birthdayCode + this.genderCode + await this.birthCityCode();
         const conversionArray = [];
-        const fiscalArray = string.split("").map(function(e,i) {
-            if((i+1) % 2 === 0) {
-                conversionArray.push(control.conversion.pair[e]);
-            } else {
-                conversionArray.push(control.conversion.odd[e]);
-            }
+        string.split("").forEach(function(e,i) {
+            return ((i+1) % 2 === 0) ? conversionArray.push(control.conversion.pair[e]) : conversionArray.push(control.conversion.odd[e]);
         });
         return control.conversion.controlChar[conversionArray.reduce(function(total, current) { return total + current}) % 26];
     }
 }
 
-function surnameGenerator(consonant, vowel) {
-        const fiscalConsonant = consonant.slice(0,3).join("");
-        if(fiscalConsonant.length === 3) {
-            return fiscalConsonant.toUpperCase();
-        } else {
-            const addVowel = fiscalConsonant + vowel.slice(0,3-fiscalConsonant.length).join("");
-            return addVowel.toUpperCase();
-        }
-} 
 
-const generator = new fiscalCode("Ricardo", "Bertoldi","08/12/1987","M","Trento");
-
-console.log(generator.controlCharacter());
 module.exports = fiscalCode

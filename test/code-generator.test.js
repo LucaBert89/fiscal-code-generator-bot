@@ -75,3 +75,13 @@ describe('should generate the name combination for the fiscal code', () => {
      });
    
  })
+
+ describe('should generate the control Character', () => {
+
+    const codeGenerator = new fiscalGenerator("Luca", "Bertoldi","01/12/1989","M","Trento");
+     test("calculate the control Character based on the controlChart file", async  () => {
+         const data = await codeGenerator.controlCharacter();
+         expect(data).toEqual("X");
+     });
+   
+ })
