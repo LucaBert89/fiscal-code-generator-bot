@@ -3,7 +3,7 @@
 Create a Telegram Bot that generates a Fiscal Code (https://it.wikipedia.org/wiki/Codice_fiscale)
 
 ## Rules and Usage
-Look for **"FiscalCodeLucaB"** on Telegram and digit "/start" to start the conversation with the bot.
+Lunch the server on https://fiscal-code-telegram.herokuapp.com/ and look for **"FiscalCodeLucaB"** on Telegram and digit "/start" to start the conversation with the bot.
 
 ## DESCRIPTION:
 This application is a TELEGRAM BOT that generate a fiscal code of an Italian citizen by providing his name , surname, sex, birthday and birth city.
