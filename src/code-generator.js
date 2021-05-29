@@ -1,4 +1,5 @@
 const fetch = require("node-fetch");
+const control = require("./controlChart");
 
 class fiscalCode {
     constructor(name, surname, birthday, gender, birthCity) {
@@ -59,6 +60,18 @@ class fiscalCode {
             }
         }
     }
+    async controlCharacter() {
+        const string = this.surnameCode + this.nameCode + this.birthdayCode + this.genderCode + await this.birthCityCode();
+        const conversionArray = [];
+        const fiscalArray = string.split("").map(function(e,i) {
+            if((i+1) % 2 === 0) {
+                conversionArray.push(control.conversion.pair[e]);
+            } else {
+                conversionArray.push(control.conversion.odd[e]);
+            }
+        });
+        return control.conversion.controlChar[conversionArray.reduce(function(total, current) { return total + current}) % 26];
+    }
 }
 
 function surnameGenerator(consonant, vowel) {
@@ -71,4 +84,7 @@ function surnameGenerator(consonant, vowel) {
         }
 } 
 
+const generator = new fiscalCode("Ricardo", "Bertoldi","08/12/1987","M","Trento");
+
+console.log(generator.controlCharacter());
 module.exports = fiscalCode

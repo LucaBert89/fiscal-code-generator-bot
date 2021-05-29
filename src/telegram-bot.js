@@ -1,13 +1,13 @@
 var parse = require('csv-parse');
-const surnameGenerator = require("./surname");
-//const { Telegraf, Scenes, session } = require('telegraf')
+const fiscalGenerator = require("code-generator");
+
 const {Telegraf, Scenes, session, Markup} = require('telegraf');
 require('dotenv').config()
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 const contactDataWizard = new Scenes.WizardScene(
-    'super-wizard', // first argument is Scene_ID, same as for BaseScene
+    'super-wizard', 
     (ctx) => {
      
         ctx.reply('Please enter your first name', Markup.removeKeyboard());
