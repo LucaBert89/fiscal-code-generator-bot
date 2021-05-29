@@ -4,7 +4,8 @@
   "description": "Create a Telegram Bot that generates a Fiscal Code (https://it.wikipedia.org/wiki/Codice_fiscale)",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node src/telegram-bot.js"
   },
   "repository": {
     "type": "git",
