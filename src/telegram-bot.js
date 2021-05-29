@@ -51,7 +51,7 @@ const contactDataWizard = new Scenes.WizardScene(
             return;
              // if the birthday isn't 10 digit length to respect the right format than error format reply
         } else if(ctx.message.text.match(/[0-9\/]/gi).length !==10) {
-            ctx.reply('Please use the right format xx/xx/xx', Markup.removeKeyboard());
+            ctx.reply('Please use the right format day/month/year (00/00/0000)', Markup.removeKeyboard());
             return;
         }
 
