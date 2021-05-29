@@ -41,13 +41,13 @@ const contactDataWizard = new Scenes.WizardScene(
             return;
         }
         ctx.wizard.state.contactData.sex = ctx.message.text;
-        ctx.reply("When is your birthday? use this form xx/xx/xx");
+        ctx.reply("When is your birthday? use this form day/month/year (00/00/0000)");
         return ctx.wizard.next();
     },
     (ctx) => {
         // if the birthday isn't composed by numbers and "/" than error format reply
         if(!ctx.message.text.match(/[0-9\/]/gi)) {
-            ctx.reply('Please use the right format xx/xx/xx', Markup.removeKeyboard());
+            ctx.reply('Please use the right format day/month/year (00/00/0000)', Markup.removeKeyboard());
             return;
              // if the birthday isn't 10 digit length to respect the right format than error format reply
         } else if(ctx.message.text.match(/[0-9\/]/gi).length !==10) {
