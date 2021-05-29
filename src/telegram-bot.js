@@ -77,11 +77,7 @@ const contactDataWizard = new Scenes.WizardScene(
         codeGenerator.birthCity = ctx.wizard.state.contactData.birthCity;
         
         ctx.reply("Your fiscal code is: " + codeGenerator.surnameCode + codeGenerator.nameCode + codeGenerator.birthdayCode + codeGenerator.genderCode + cityCode + controlCode);
-    },
-    (ctx) => {
-        bot.command('start', ctx => {
-            ctx.scene.enter('super-wizard');
-          });
+        return ctx.scene.leave();
     }
 
 );
